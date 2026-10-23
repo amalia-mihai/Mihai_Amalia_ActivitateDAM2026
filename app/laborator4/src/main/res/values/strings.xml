@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">laborator4</string>
+    <string name="adaugare">Adaugare</string>
+    <string name="adauga_marca">Adauga marca</string>
+    <string name="adauga_modelul">Adauga modelul</string>
+    <string name="recenzii_clienti">Recenzii clienti:</string>
+    <string name="este_noua">Este noua</string>
+    <string name="este_disponibila">Este disponibila</string>
+    <string name="adaugare_masina">Adaugare Masina</string>
+    <string name="tipul_combustibilului">Tipul combustibilului</string>
+    <string name="adaugare_ai">Adaugare (AI)</string>
+
+    <string-array name="Lista_tipuri_combustibil">
+        <item>Benzina</item>
+        <item>Diesel</item>
+        <item>Electric</item>
+    </string-array>
+</resources>
