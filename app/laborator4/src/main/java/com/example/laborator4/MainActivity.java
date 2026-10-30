@@ -1,12 +1,12 @@
 package com.example.laborator4;
 
 import static android.view.View.VISIBLE;
-import static android.widget.Toast.LENGTH_LONG;
 
 import android.app.ComponentCaller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +18,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+    ArrayList<String> elemente = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,17 @@ public class MainActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+        Button btnAfisare = findViewById(R.id.afisare_BTN);
+        btnAfisare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getApplicationContext(),ActivitateAfisare.class);
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("lista", elemente);
+                it.putExtras(bundle);
+                startActivityForResult(it, 40);
+            }
         });
     }
 
@@ -56,7 +70,16 @@ public class MainActivity extends AppCompatActivity {
                 tvRez.setText(masina.toString());
 
                 //Toast.makeText(this, masina.toString(), LENGTH_LONG).show();
+
+                elemente.add(masina.toString());
+            }
+        }else if(requestCode == 40) {
+            if(resultCode == RESULT_OK) {
+                elemente.clear();
+                elemente.addAll(data.getStringArrayListExtra("listaRez"));
             }
         }
     }
+
+
 }

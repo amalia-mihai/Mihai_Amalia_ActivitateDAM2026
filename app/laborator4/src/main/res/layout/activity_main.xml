@@ -25,4 +25,11 @@
         android:layout_height="wrap_content"
         android:text="@string/adaugare_ai"
         android:onClick="deschidereActivitAI"/>
+    <Button
+        android:id="@+id/afisare_BTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/afisare_lista"/>
+
+
 </LinearLayout>
