@@ -50,7 +50,7 @@ public class ActivitateAI extends AppCompatActivity {
 
         Intent it = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("masina", masina);
+        bundle.putParcelable("masina", masina);
 
         it.putExtras(bundle); //putExtras pt bundle, putExtra pt int, string etc.
         setResult(RESULT_OK, it);

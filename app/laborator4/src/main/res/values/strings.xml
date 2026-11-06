@@ -10,6 +10,9 @@
     <string name="tipul_combustibilului">Tipul combustibilului</string>
     <string name="adaugare_ai">Adaugare (AI)</string>
     <string name="afisare_lista">Afisare lista</string>
+    <string name="nota">Nota:</string>
+    <string name="disponibilitate">Disponibilitate:</string>
+    <string name="noua">Noua:</string>
 
     <string-array name="Lista_tipuri_combustibil">
         <item>Benzina</item>

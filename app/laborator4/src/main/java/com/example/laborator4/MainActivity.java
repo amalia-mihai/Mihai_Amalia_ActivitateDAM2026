@@ -5,6 +5,7 @@ import static android.view.View.VISIBLE;
 import android.app.ComponentCaller;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<String> elemente = new ArrayList<>();
+    ArrayList<Masina> elemente = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it = new Intent(getApplicationContext(),ActivitateAfisare.class);
                 Bundle bundle = new Bundle();
-                bundle.putStringArrayList("lista", elemente);
+                bundle.putParcelableArrayList("lista", elemente);
                 it.putExtras(bundle);
                 startActivityForResult(it, 40);
             }
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 20) {
             if (resultCode == RESULT_OK) {
                 Bundle bundle = data.getExtras();
-                Masina masina = (Masina)bundle.getSerializable("masina");
+                Masina masina = (Masina)bundle.getParcelable("masina");
 
                 TextView tvRez = findViewById(R.id.rezultat_TV);
                 tvRez.setVisibility(VISIBLE);
@@ -71,12 +72,12 @@ public class MainActivity extends AppCompatActivity {
 
                 //Toast.makeText(this, masina.toString(), LENGTH_LONG).show();
 
-                elemente.add(masina.toString());
+                elemente.add(masina);
             }
         }else if(requestCode == 40) {
             if(resultCode == RESULT_OK) {
                 elemente.clear();
-                elemente.addAll(data.getStringArrayListExtra("listaRez"));
+                elemente.addAll(data.getParcelableArrayListExtra("listaRez"));
             }
         }
     }

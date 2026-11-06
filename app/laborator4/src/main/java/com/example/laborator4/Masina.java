@@ -1,8 +1,9 @@
 package com.example.laborator4;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Masina implements Serializable {
+public class Masina implements Parcelable {
     private String marca;
     private String model;
     private String tipCombustibil;
@@ -21,6 +22,53 @@ public class Masina implements Serializable {
 
     public Masina() {
     }
+
+    protected Masina(Parcel in) {
+        marca = in.readString();
+        model = in.readString();
+        tipCombustibil = in.readString();
+        if (in.readByte() == 0) {
+            recenzieClienti = null;
+        } else {
+            recenzieClienti = in.readFloat();
+        }
+        byte tmpEsteDisponibila = in.readByte();
+        esteDisponibila = tmpEsteDisponibila == 0 ? null : tmpEsteDisponibila == 1;
+        byte tmpEsteNoua = in.readByte();
+        esteNoua = tmpEsteNoua == 0 ? null : tmpEsteNoua == 1;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(marca);
+        dest.writeString(model);
+        dest.writeString(tipCombustibil);
+        if (recenzieClienti == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(recenzieClienti);
+        }
+        dest.writeByte((byte) (esteDisponibila == null ? 0 : esteDisponibila ? 1 : 2));
+        dest.writeByte((byte) (esteNoua == null ? 0 : esteNoua ? 1 : 2));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Masina> CREATOR = new Creator<Masina>() {
+        @Override
+        public Masina createFromParcel(Parcel in) {
+            return new Masina(in);
+        }
+
+        @Override
+        public Masina[] newArray(int size) {
+            return new Masina[size];
+        }
+    };
 
     public String getMarca() {
         return marca;
